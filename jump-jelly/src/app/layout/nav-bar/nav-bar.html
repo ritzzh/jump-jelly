@@ -1,0 +1,38 @@
+<mat-toolbar color="primary" class="shadow-sm px-3">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+
+    <!-- Brand + Mobile Toggle -->
+    <div class="d-flex align-items-center">
+      <button mat-icon-button class="d-lg-none me-2" (click)="isMenuOpen = !isMenuOpen">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="mat-h2 text-primary">Jump Jelly</span>
+    </div>
+
+    <!-- Desktop Nav Links -->
+     <div class="actions d-flex gap-3">
+         <div class="d-none d-lg-flex gap-3">
+           <a mat-button color="accent" routerLink="/dashboard">Dashboard</a>
+         </div>
+     
+         <!-- Profile Menu -->
+         <button matButton="outlined" [matMenuTriggerFor]="profileMenu" class="d-flex align-items-center">
+           <mat-icon class="me-1">account_circle</mat-icon>
+           <span class="d-none d-sm-inline">Profile</span>
+         </button>
+         <mat-menu #profileMenu="matMenu">
+           <button mat-menu-item>My Account</button>
+           <button mat-menu-item>Settings</button>
+           <mat-divider></mat-divider>
+           <button mat-menu-item>Logout</button>
+         </mat-menu>
+     </div>
+
+  </div>
+</mat-toolbar>
+
+<!-- Mobile Menu -->
+<div *ngIf="isMenuOpen" class="d-lg-none bg-light p-3">
+  <a mat-button routerLink="/dashboard" class="w-100 text-start mb-2">Dashboard</a>
+  <a mat-button routerLink="/reports" class="w-100 text-start">Reports</a>
+</div>
