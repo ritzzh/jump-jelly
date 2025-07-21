@@ -1,7 +1,7 @@
 Modules
 
 Dashboard:
-            1. Pdf Control
-            2. Image Control
-            3. Conversions Control
-            4. Plan Control
+            1. Pdf Core
+            2. Image Core
+            3. Conversions Core
+            4. Plan Core

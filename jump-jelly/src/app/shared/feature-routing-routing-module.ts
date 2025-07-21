@@ -10,6 +10,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('../modules/dashboard/dashboard-module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'pdf-core',
+        loadChildren: () => import('../modules/pdf-core/pdf-core-module').then(m => m.PdfCoreModule)
       }
     ]
   }

@@ -1,0 +1,29 @@
+<div class="container mt-4">
+  <mat-card>
+    <mat-card-title>Image to PDF Converter</mat-card-title>
+    <mat-card-content>
+      <div class="mb-3">
+        <input type="file" accept="image/*" (change)="onFileSelected($event)" multiple class="form-control" />
+      </div>
+
+      <div class="row mt-3">
+        hehe
+        <div class="col-md-3 mb-3" *ngFor="let img of imagePreviews; let i = index">
+          <mat-card>
+            <div class="d-flex w-100 justify-content-end">
+              <button matButton="outlined" class="p-0" (click)="removeImage(img)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <img [src]="img" class="img-fluid rounded border" [alt]="'Image ' + (i + 1)" />
+          </mat-card>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="d-flex justify-content-end">
+      <button mat-raised-button color="primary" (click)="convertToPdf()" [disabled]="!imagePreviews.length">
+        Convert to PDF
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
