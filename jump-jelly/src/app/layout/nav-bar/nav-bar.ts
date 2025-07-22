@@ -21,11 +21,10 @@ export class NavBar {
   isLoggedIn: boolean = true;
 
   constructor ( private commonService : CommonService, private router: Router) {
-    console.log(this.isLoggedIn)
-   commonService.$isLoggedIn.subscribe(status => {
-    this.isLoggedIn = status
-   })
-   console.log(this.isLoggedIn)
+  }
+  
+  async ngOnInit( ) {
+    this.isLoggedIn = await this.commonService.checkLoginStatus()
   }
 
   redirectToLogin() {
@@ -35,7 +34,7 @@ export class NavBar {
   getMenuSelection(selection: string) {
     switch ( selection ) {
       case 'logout': {
-        this.commonService.$isLoggedIn.next(false);
+        this.commonService.updateLoginStatus(false);
         this.router.navigate(['/login']);
         break;
       }

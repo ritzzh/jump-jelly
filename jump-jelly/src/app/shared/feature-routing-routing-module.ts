@@ -14,6 +14,10 @@ const routes: Routes = [
       {
         path: 'pdf-core',
         loadChildren: () => import('../modules/pdf-core/pdf-core-module').then(m => m.PdfCoreModule)
+      },
+      {
+        path: 'chart-core',
+        loadChildren: () => import('../modules/chart-core/chart-core-module').then(m => m.ChartCoreModule)
       }
     ]
   }

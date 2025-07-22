@@ -16,4 +16,8 @@ export class Dashboard {
   imageToPdf() {
     this.router.navigate(['pdf-core/img-to-pdf'])
   }
+
+  plotChart() {
+    this.router.navigate(['chart-core/plot-chart'])
+  }
 }

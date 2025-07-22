@@ -39,7 +39,7 @@ onLogin() {
   if (this.loginForm.invalid) return; // Prevent further action if form is invalid
 
   const { email, password } = this.loginForm.value;
-  this.commonService.$isLoggedIn.next(true);
+  this.commonService.updateLoginStatus(true)
   this.router.navigate(['/dashboard'])
   console.log(email)
 }
