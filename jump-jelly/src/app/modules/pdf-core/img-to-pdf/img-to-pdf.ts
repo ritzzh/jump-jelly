@@ -4,39 +4,45 @@ import { MatCardModule } from '@angular/material/card';
 import { jsPDF } from 'jspdf';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+
 
 @Component({
   selector: 'app-img-to-pdf',
-  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatInputModule, MatFormFieldModule, FormsModule, MatSelectModule],
   templateUrl: './img-to-pdf.html',
   styleUrl: './img-to-pdf.scss',
 })
 export class ImgToPdf {
+  pdfName: string = "ImageToPdf"
+  pageFormat: string = "a0";
+  pageOrientation: "portrait" | "landscape" = "portrait"
   imageFiles: File[] = [];
   imagePreviews: string[] = [];
 
-  constructor (private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef) {
 
   }
 
-async onFileSelected(event: Event) {
-  const input = event.target as HTMLInputElement;
-  if (!input.files) return;
+  async onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files) return;
 
-  this.imageFiles = Array.from(input.files);
-  const previews: string[] = [];
+    this.imageFiles = Array.from(input.files);
+    const previews: string[] = [];
 
-  for (const file of this.imageFiles) {
-    const preview = await this.readFileAsDataURL(file);
-    previews.push(preview);
-    console.log(preview, ": loaded")
+    for (const file of this.imageFiles) {
+      const preview = await this.readFileAsDataURL(file);
+      previews.push(preview);
+      console.log(preview, ": loaded")
+    }
+
+    this.imagePreviews = previews;
+    this.cdr.detectChanges();
   }
-  
-  this.imagePreviews = previews;
-  this.cdr.detectChanges();
-
-  // Manually trigger change detection
-}
 
 
   private readFileAsDataURL(file: File): Promise<string> {
@@ -49,25 +55,48 @@ async onFileSelected(event: Event) {
   }
 
   removeImage(image: any) {
-    this.imagePreviews.filter(img => img === image);
-    console.log(image, this.imagePreviews)
+    this.imagePreviews = this.imagePreviews.filter(img => img !== image);
+  }
+
+  clearSelected() {
+    this.imagePreviews = [];
   }
 
 
   convertToPdf() {
-    const pdf = new jsPDF();
+    console.log(this.pageOrientation, this.pageFormat);
 
-    this.imagePreviews.forEach((image,index) => {
+    const pdf = new jsPDF({
+      orientation: this.pageOrientation,
+      format: this.pageFormat,
+      unit: 'mm'
+    });
+
+    this.imagePreviews.forEach((image, index) => {
       const imgProps = pdf.getImageProperties(image);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      const ratio = imgProps.width / imgProps.height;
+      let imgWidth = pageWidth * 0.9;
+      let imgHeight = imgWidth / ratio;
+
+      if (imgHeight > pageHeight * 0.9) {
+        imgHeight = pageHeight * 0.9;
+        imgWidth = imgHeight * ratio;
+      }
+
+      const x = (pageWidth - imgWidth) / 2;
+      const y = (pageHeight - imgHeight) / 2;
+
       if (index > 0) {
         pdf.addPage();
       }
 
-      pdf.addImage(image, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-    })
+      pdf.addImage(image, 'JPEG', x, y, imgWidth, imgHeight);
+    });
 
-    pdf.save('saved-images');
+    pdf.save((this.pdfName?.trim() || 'ImageToPdf') + '.pdf');
   }
+
 }

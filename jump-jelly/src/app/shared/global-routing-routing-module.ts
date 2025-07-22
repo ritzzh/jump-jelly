@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { authGuard } from '../core/guards/auth-guard';
+import { AuthLayout } from '../modules/auth/auth-layout';
+import { childAuthGuard } from '../core/guards/child-auth-guard';
 
 const routes: Routes = [
   {
@@ -9,6 +12,13 @@ const routes: Routes = [
   },
   {
     path: '',
+    component: AuthLayout,
+    canActivateChild: [childAuthGuard],
+    loadChildren: () => import('../modules/auth/auth-routing-module').then(m => m.AuthRoutingModule)
+  },
+  {
+    path: '',
+    canActivateChild: [authGuard],
     loadChildren: () => import('../shared/feature-routing-routing-module').then(m => m.FeatureRoutingRoutingModule)
   }
 ];

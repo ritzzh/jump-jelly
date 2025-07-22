@@ -1,29 +1,68 @@
-<div class="container mt-4">
-  <mat-card>
-    <mat-card-title>Image to PDF Converter</mat-card-title>
+<div class="container w-100 mt-4">
+  <mat-card class="w-100">
+    <mat-card-title class="p-2">Image to PDF Converter</mat-card-title>
     <mat-card-content>
-      <div class="mb-3">
-        <input type="file" accept="image/*" (change)="onFileSelected($event)" multiple class="form-control" />
-      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="mb-3">
+            <input type="file" accept="image/*" (change)="onFileSelected($event)" multiple class="form-control" />
+          </div>
 
-      <div class="row mt-3">
-        hehe
-        <div class="col-md-3 mb-3" *ngFor="let img of imagePreviews; let i = index">
-          <mat-card>
-            <div class="d-flex w-100 justify-content-end">
-              <button matButton="outlined" class="p-0" (click)="removeImage(img)">
-                <mat-icon>close</mat-icon>
-              </button>
+          <div class="row mt-3">
+            <div class="col-md-3 mb-3" *ngFor="let img of imagePreviews; let i = index">
+              <mat-card>
+                <div class="d-flex w-100 justify-content-end">
+                  <button matIconButton (click)="removeImage(img)">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+                <img [src]="img" class="img-fluid rounded border" [alt]="'Image ' + (i + 1)" />
+              </mat-card>
             </div>
-            <img [src]="img" class="img-fluid rounded border" [alt]="'Image ' + (i + 1)" />
-          </mat-card>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <form class="w-100">
+            <mat-form-field class="w-100">
+              <mat-label>Enter Pdf Name</mat-label>
+              <input matInput [(ngModel)]="pdfName" name="pdfName" placeholder="Eg. Combined Images" />
+              <mat-hint align="start">
+                <strong>Don't add extensions like (.pdf)</strong>
+              </mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-2">
+              <mat-label>Page Size</mat-label>
+              <mat-select [(ngModel)]="pageFormat" name="pageFormat">
+                <mat-option *ngFor="let format of ['a0','a1','a2','a3','a4','a5']" [value]="format">
+                  {{ format.toUpperCase() }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-2">
+              <mat-label>Page Orientation</mat-label>
+              <mat-select [(ngModel)]="pageOrientation" name="pageOrientation">
+                <mat-option *ngFor="let orientation of ['landscape', 'portrait']" [value]="orientation">
+                  {{ orientation }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+
         </div>
       </div>
     </mat-card-content>
     <mat-card-actions class="d-flex justify-content-end">
-      <button mat-raised-button color="primary" (click)="convertToPdf()" [disabled]="!imagePreviews.length">
-        Convert to PDF
-      </button>
+      <div class="d-flex justify-content-between align-items-center gap-3">
+        <button mat-raised-button color="primary" (click)="clearSelected()" [disabled]="!imagePreviews.length">
+          Clear All
+        </button>
+        <button mat-raised-button color="primary" (click)="convertToPdf()" [disabled]="!imagePreviews.length">
+          Convert to PDF
+        </button>
+      </div>
     </mat-card-actions>
   </mat-card>
 </div>
