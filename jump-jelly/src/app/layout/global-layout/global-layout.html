@@ -1,16 +1,31 @@
 <div class="d-flex flex-column min-vh-100">
-  <!-- Navbar -->
+  <!-- Global Top Navbar -->
   <div class="global-nav">
-    <app-nav-bar></app-nav-bar>
+    <app-nav-bar (toggleSidenav)="toggleSidenav($event);"></app-nav-bar>
   </div>
 
-  <!-- Main Content -->
-  <main class="flex-fill">
-    <router-outlet></router-outlet>
-  </main>
+  <!-- Layout with Sidenav and Content -->
+  <mat-sidenav-container class="flex-fill" autosize>
+    <!-- Sidebar -->
+    <mat-sidenav
+      #sidenav
+      [(opened)]="isSidenavOpen"
+      [mode]="sidenavMode"
+      class="bg-light"
+      [style.width.px]="isSidenavOpen ? 60 : 60"
+    >
+    <app-side-nav-bar>
+    </app-side-nav-bar>
+    </mat-sidenav>
 
-  <!-- Sticky Footer -->
+    <!-- Main Content -->
+    <mat-sidenav-content class="p-3">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <!-- Global Sticky Footer -->
   <mat-toolbar color="primary" class="justify-content-center">
-    <!-- © 2025 Jump Jelly. All rights reserved. -->
+    © 2025 Jump Jelly. All rights reserved.
   </mat-toolbar>
 </div>

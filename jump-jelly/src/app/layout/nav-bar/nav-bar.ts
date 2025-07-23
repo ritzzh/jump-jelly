@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,9 +17,11 @@ import { CommonService } from '../../core/services/common-service';
   styleUrl: './nav-bar.scss'
 })
 export class NavBar {
+  @Output() toggleSidenav = new EventEmitter<boolean>();
   isMenuOpen = false;
   isLoggedIn: boolean = true;
-
+  
+  
   constructor ( private commonService : CommonService, private router: Router) {
   }
   
@@ -48,5 +50,10 @@ export class NavBar {
       }
       default: break;
     } 
+  }
+
+  openSideNav() {
+    console.log('emmiting')
+    this.toggleSidenav.emit(true);
   }
 }

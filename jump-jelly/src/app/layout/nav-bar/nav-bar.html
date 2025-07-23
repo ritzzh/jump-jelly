@@ -1,9 +1,9 @@
-<mat-toolbar color="primary" class="shadow-sm px-3">
+<mat-toolbar color="primary" class="shadow-sm px-1">
   <div class="container-fluid d-flex justify-content-between align-items-center">
 
     <!-- Brand + Mobile Toggle -->
     <div class="d-flex align-items-center">
-      <button mat-icon-button class="d-lg-none me-2" (click)="isMenuOpen = !isMenuOpen">
+      <button mat-icon-button (click)="openSideNav()">
         <mat-icon>menu</mat-icon>
       </button>
       <span class="mat-h2 text-primary">Jump Jelly</span>
@@ -11,10 +11,6 @@
 
     <!-- Desktop Nav Links -->
      <div class="actions d-flex gap-3">
-         <div class="d-none d-lg-flex gap-3">
-           <a mat-button color="accent" routerLink="/dashboard">Dashboard</a>
-         </div>
-
           <button *ngIf="!isLoggedIn" matButton="outlined"  (click)="redirectToLogin()" class="d-flex align-items-center">
             <mat-icon class="me-1">account_circle</mat-icon>
             <span class="d-none d-sm-inline">Login</span>
@@ -35,9 +31,3 @@
 
   </div>
 </mat-toolbar>
-
-<!-- Mobile Menu -->
-<div *ngIf="isMenuOpen" class="d-lg-none bg-light p-3">
-  <a mat-button routerLink="/dashboard" class="w-100 text-start mb-2">Dashboard</a>
-  <a mat-button routerLink="/reports" class="w-100 text-start">Reports</a>
-</div>
