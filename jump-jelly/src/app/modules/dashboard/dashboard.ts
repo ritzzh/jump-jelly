@@ -20,4 +20,12 @@ export class Dashboard {
   plotChart() {
     this.router.navigate(['chart-core/plot-chart'])
   }
+
+  extractFiles() {
+    this.router.navigate(['file-core/extract-files'])
+  }
+
+  watchLocations() {
+    this.router.navigate(['map-core/watch-locations'])
+  }
 }

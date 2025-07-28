@@ -18,6 +18,14 @@ const routes: Routes = [
       {
         path: 'chart-core',
         loadChildren: () => import('../modules/chart-core/chart-core-module').then(m => m.ChartCoreModule)
+      },
+      {
+        path: 'file-core',
+        loadChildren: () => import('../modules/file-core/file-core-module').then(m => m.FileCoreModule)
+      },
+      {
+        path: 'map-core',
+        loadChildren: () => import('../modules/map-core/map-core-module').then(m => m.MapCoreModule)
       }
     ]
   }
