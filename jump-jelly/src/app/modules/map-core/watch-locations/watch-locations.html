@@ -1,12 +1,46 @@
-<div class="d-flex flex-row align-items-center w-100">
-  <div #mapContainer class="map-container"></div>
-  <div class="map-controls">
-    <input
-      type="text"
-      #locationInput
-      placeholder="Enter coordinates (lat,lng)"
-    />
-    <button (click)="addLocation(locationInput.value)">Add Pin</button>
-  </div>
+<div class="d-flex flex-row align-items-start w-100">
+  <!-- Map Area -->
+  <div #mapContainer class="map-container me-3"></div>
 
+  <!-- Controls Area -->
+  <div class="map-controls d-flex flex-column gap-2">
+    <!-- Coordinates Input -->
+    <div>
+      <input
+        type="text"
+        #locationInput
+        placeholder="Enter coordinates (lat,lng)"
+        class="form-control mb-2"
+      />
+      <button class="btn btn-primary btn-sm" (click)="addLocation(locationInput.value)">Add Pin</button>
+    </div>
+
+    <!-- Place Name Input -->
+    <div>
+      <input
+        type="text"
+        #placeInput
+        placeholder="Enter place name (e.g., Delhi)"
+        class="form-control mb-2"
+      />
+      <button class="btn btn-success btn-sm" (click)="searchByPlace(placeInput.value)">Search & Pin</button>
+    </div>
+<!-- IP Location -->
+<div>
+  <input type="text" #ipInput placeholder="Enter IP (leave blank for own IP)" class="form-control mb-2" />
+  <button class="btn btn-info btn-sm" (click)="locateByIp(ipInput.value)">Locate IP</button>
+</div>
+
+
+    <!-- CSV Upload -->
+    <div>
+      <input type="file" (change)="loadCsv($event)" accept=".csv" class="form-control mb-2" />
+      <small class="text-muted">CSV format: lat,lng,name</small>
+    </div>
+
+    <!-- Pin Creation Mode -->
+    <div>
+      <button class="btn btn-outline-secondary btn-sm" (click)="enableClickToAdd()">Click Map to Add Pin</button>
+    </div>
+  </div>
 </div>
