@@ -1,0 +1,15 @@
+
+input {
+  margin: 10px;
+  padding: 8px;
+  width: 300px;
+}
+
+.map-container {
+  flex: 1;
+  height: 500px;
+  min-height: 80vh;
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+}

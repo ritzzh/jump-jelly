@@ -1,1 +1,12 @@
-<p>watch-locations works!</p>
+<div class="d-flex flex-row align-items-center w-100">
+  <div #mapContainer class="map-container"></div>
+  <div class="map-controls">
+    <input
+      type="text"
+      #locationInput
+      placeholder="Enter coordinates (lat,lng)"
+    />
+    <button (click)="addLocation(locationInput.value)">Add Pin</button>
+  </div>
+
+</div>
