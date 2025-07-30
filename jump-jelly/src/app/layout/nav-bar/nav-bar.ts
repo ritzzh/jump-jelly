@@ -37,7 +37,7 @@ export class NavBar {
     switch ( selection ) {
       case 'logout': {
         this.commonService.updateLoginStatus(false);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/jump-start']);
         break;
       }
       case 'accounts': {

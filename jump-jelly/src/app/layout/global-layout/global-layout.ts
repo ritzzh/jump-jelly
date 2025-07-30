@@ -17,6 +17,10 @@ import { SideNavBar } from "../side-nav-bar/side-nav-bar";
   styleUrl: './global-layout.scss'
 })
 export class GlobalLayout {
+  creatorName = 'Ritesh';
+githubUsername = 'riteshksi231';
+linkedinUsername = 'ritesh-kumar-123456789'; // Replace with actual
+instagramUsername = 'ritesh.ig';             // Replace with actual
   isSidenavOpen = true; // initial state
   sidenavMode: 'side' | 'over' = 'side'; // can also switch to responsive mode later
 

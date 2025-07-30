@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { CommonService } from '../../core/services/common-service';
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -14,5 +15,10 @@ import { RouterModule } from '@angular/router';
   styleUrl: './side-nav-bar.scss'
 })
 export class SideNavBar {
-
+  isLoggedIn!: boolean;
+  constructor ( private commonService: CommonService) {
+    this.commonService.checkLoginStatus().then(status => {
+      this.isLoggedIn = status;
+    });
+  }
 }

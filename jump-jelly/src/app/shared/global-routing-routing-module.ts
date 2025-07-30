@@ -6,8 +6,12 @@ import { childAuthGuard } from '../core/guards/child-auth-guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'jump-start',
     pathMatch: 'full'
+  },
+  {
+    path: '',
+    loadChildren: () => import('../shared/open-routing-routing-module').then(m => m.OpenRoutingRoutingModule)
   },
   {
     path: '',
@@ -17,6 +21,7 @@ const routes: Routes = [
   },
   {
     path: '',
+    canActivate: [childAuthGuard],
     loadChildren: () => import('../shared/feature-routing-routing-module').then(m => m.FeatureRoutingRoutingModule)
   }
 ];

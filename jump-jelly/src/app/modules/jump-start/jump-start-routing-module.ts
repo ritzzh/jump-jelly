@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Profile } from './profile';
+import { JumpStart } from './jump-start';
 
-const routes: Routes = [{
-  path: '',
-  component: Profile
-}];
+const routes: Routes = [
+  {
+    path: '',
+    component: JumpStart
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProfileRoutingModule { }
+export class JumpStartRoutingModule { }

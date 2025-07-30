@@ -12,20 +12,8 @@ const routes: Routes = [
         loadChildren: () => import('../modules/dashboard/dashboard-module').then(m => m.DashboardModule)
       },
       {
-        path: 'pdf-core',
-        loadChildren: () => import('../modules/pdf-core/pdf-core-module').then(m => m.PdfCoreModule)
-      },
-      {
-        path: 'chart-core',
-        loadChildren: () => import('../modules/chart-core/chart-core-module').then(m => m.ChartCoreModule)
-      },
-      {
-        path: 'file-core',
-        loadChildren: () => import('../modules/file-core/file-core-module').then(m => m.FileCoreModule)
-      },
-      {
-        path: 'map-core',
-        loadChildren: () => import('../modules/map-core/map-core-module').then(m => m.MapCoreModule)
+        path: 'profile',
+        loadChildren: () => import('../modules/profile/profile-module').then(m => m.ProfileModule)
       }
     ]
   }

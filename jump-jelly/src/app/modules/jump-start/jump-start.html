@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div class="hero-section container-fluid my-4 mx-0 w-80 h-100">
+        <div
+            class="hero-content d-flex flex-column justify-content-center align-items-center text-center py-5 px-3">
+            <h1 class="display-4 mb-3">Welcome to <span class="text-warning">Jump Jelly</span></h1>
+    
+            <p class="typing-text lead mb-4">
+                {{ fullText }}
+            </p>
+    
+            <button mat-raised-button color="accent" class="mt-2" (click)="login()">
+                <mat-icon class="me-1">login</mat-icon>
+                    Get Started
+            </button>
+        </div>
+    
+    </div>
+    <mat-divider></mat-divider>
+    <div class="container-fluid my-4 mx-0 w-80">
+        <h3 class="text-center mb-3"><i class="fa-solid fa-rocket"></i> Jump Start</h3>
+
+        <div class="row g-3 carousel-card">
+            <ng-container *ngFor="let tool of paginatedTools()">
+                <div class="col-md-3">
+                    <mat-card class="text-center shadow-md p-3 ds-clickbox">
+                        <mat-card-content>
+                            <button [matTooltip]="tool.active ? '' : 'This feature is under development'"
+                                [disabled]="!tool.active" mat-stroked-button color="primary" (click)="tool.action()">
+                                <mat-icon class="me-2">{{ tool.icon }}</mat-icon>
+                                {{ tool.name }}
+                            </button>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </ng-container>
+
+        </div>
+        <!-- Carousel controls -->
+
+
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <button matIconButton color="primary" (click)="prevSlide()" [disabled]="currentSlide === 0">
+                <mat-icon class="mb-1">arrow_back</mat-icon>
+            </button>
+            <div class="d-flex justify-content-center">
+                <ng-container *ngFor="let _ of totalPages(); let i = index">
+                    <button class="mx-1 btn btn-sm rounded-circle" [ngClass]="{
+                    'btn-primary': currentSlide === i,
+                    'btn-outline-secondary': currentSlide !== i
+                }" style="width: 12px; height: 12px; padding: 0;" (click)="goToSlide(i)"></button>
+                </ng-container>
+            </div>
+            <button matIconButton color="primary" (click)="nextSlide()"
+                [disabled]="(currentSlide + 1) * toolsPerPage >= tools.length">
+                <mat-icon class="mb-1">arrow_forward</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
